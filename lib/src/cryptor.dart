@@ -43,7 +43,7 @@ class _Cryptor {
   // Creates random encryption key of [length] bytes long.
   //
   // Returns [Uint8List] object containing created key.
-  Uint8List createKey([int length = 32]) {
+  Uint8List createKey([int? length = 32]) {
     return Uint8List.fromList(List<int>.generate(length, (i) => _secureRandom.nextInt(256)));
   }
 
@@ -574,7 +574,7 @@ class _Cryptor {
   int _s0; int _s1;
 
 
-  Uint8List sha256(Uint8List data, [Uint8List hmacIpad]) {
+  Uint8List sha256(Uint8List data, [Uint8List? hmacIpad]) {
     AesCryptArgumentError.checkNullOrEmpty(data, 'Empty data.');
 
     ByteData chunk;
@@ -1124,7 +1124,7 @@ class _Cryptor {
   }
 
 
-  int _readChunkIntSync(RandomAccessFile f, int num_bytes, String chunk_name, [int expected_value]) {
+  int _readChunkIntSync(RandomAccessFile f, int num_bytes, String chunk_name, [int? expected_value]) {
     int result;
     Uint8List data;
 
@@ -1160,7 +1160,7 @@ class _Cryptor {
   }
 
 
-  Future<int> _readChunkInt(RandomAccessFile f, int num_bytes, String chunk_name, [int expected_value]) async {
+  Future<int> _readChunkInt(RandomAccessFile f, int num_bytes, String chunk_name, [int? expected_value]) async {
     int result;
     Uint8List data;
 

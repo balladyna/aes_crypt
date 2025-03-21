@@ -39,7 +39,7 @@ class AesCrypt {
   /// Creates the library wrapper.
   ///
   /// Optionally sets encryption/decryption password as [password].
-  AesCrypt([String password = '']) {
+  AesCrypt([String? password = '']) {
     _password = password;
     _passBytes = password.toUtf16Bytes(Endian.little);
     _owMode = AesCryptOwMode.warn;
@@ -178,7 +178,7 @@ class AesCrypt {
   /// If encrypted file exists, the behaviour depends on [AesCryptOwMode].
   ///
   /// Returns [String] object containing the path to encrypted file.
-  String encryptFileSync(String srcFilePath, [String destFilePath = '']) {
+  String encryptFileSync(String srcFilePath, [String? destFilePath = '']) {
     srcFilePath = srcFilePath.trim();
     destFilePath = destFilePath.trim();
     AesCryptArgumentError.checkNullOrEmpty(_password, 'Empty password.');
@@ -197,7 +197,7 @@ class AesCrypt {
   ///
   /// Returns [Future<String>] that completes with the path to encrypted file
   /// once the entire operation has completed.
-  Future<String> encryptFile(String srcFilePath, [String destFilePath = '']) async {
+  Future<String> encryptFile(String srcFilePath, [String? destFilePath = '']) async {
     srcFilePath = srcFilePath.trim();
     destFilePath = destFilePath.trim();
     AesCryptArgumentError.checkNullOrEmpty(_password, 'Empty password.');
@@ -267,7 +267,7 @@ class AesCrypt {
   ///
   /// Returns [Future<String>] that completes with decrypted text
   /// once the entire operation has completed.
-  Future<String> decryptTextFromFile(String srcFilePath, {bool utf16 = false, Endian endian = Endian.big}) async {
+  Future<String> decryptTextFromFile(String srcFilePath, {bool utf16 = false, Endian? endian = Endian.big}) async {
     Uint8List decData = await decryptDataFromFileSync(srcFilePath);
     String srcString;
     if ((decData[0] == 0xFE && decData[1] == 0xFF) || (decData[0] == 0xFF && decData[1] == 0xFE)) {
@@ -291,7 +291,7 @@ class AesCrypt {
   /// If decrypted file exists, the behaviour depends on [AesCryptOwMode].
   ///
   /// Returns [String] object containing the path to decrypted file.
-  String decryptFileSync(String srcFilePath, [String destFilePath = '']) {
+  String decryptFileSync(String srcFilePath, [String? destFilePath = '']) {
     srcFilePath = srcFilePath.trim();
     destFilePath = destFilePath.trim();
     AesCryptArgumentError.checkNullOrEmpty(_password, 'Empty password.');
@@ -312,7 +312,7 @@ class AesCrypt {
   ///
   /// Returns [Future<String>] that completes with the path to decrypted file
   /// once the entire operation has completed.
-  Future<String> decryptFile(String srcFilePath, [String destFilePath = '']) async {
+  Future<String> decryptFile(String srcFilePath, [String? destFilePath = '']) async {
     srcFilePath = srcFilePath.trim();
     destFilePath = destFilePath.trim();
     AesCryptArgumentError.checkNullOrEmpty(_password, 'Empty password.');
@@ -329,7 +329,7 @@ class AesCrypt {
   /// Creates random encryption key of [length] bytes long.
   ///
   /// Returns [Uint8List] object containing created key.
-  Uint8List createKey([int length = 32]) => _Cryptor().createKey(length);
+  Uint8List createKey([int? length = 32]) => _Cryptor().createKey(length);
 
   /// Creates random initialization vector.
   ///
@@ -347,7 +347,7 @@ class AesCrypt {
   Uint8List hmacSha256(Uint8List key, Uint8List data) => _Cryptor().hmacSha256(key, data);
 
   /// Sets AES encryption key [key] and the initialization vector [iv].
-  void aesSetKeys(Uint8List key, [Uint8List iv]) => _aes.aesSetKeys(key, iv);
+  void aesSetKeys(Uint8List key, [Uint8List? iv]) => _aes.aesSetKeys(key, iv);
 
   /// Sets AES mode of operation as [mode].
   ///

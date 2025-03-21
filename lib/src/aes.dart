@@ -191,7 +191,7 @@ class _Aes {
 
 
   // Sets AES encryption key [key] and the initialization vector [iv].
-  void aesSetKeys(Uint8List key, [Uint8List iv]) {
+  void aesSetKeys(Uint8List key, [Uint8List? iv]) {
     if (![16, 24, 32].contains(key.length)) {
       throw AesCryptArgumentError('Invalid key length for AES. Provided ${key.length * 8} bits, expected 128, 192 or 256 bits.');
     } else if (_aesMode != AesMode.ecb && iv.isNullOrEmpty) {

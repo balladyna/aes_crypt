@@ -23,7 +23,7 @@ extension _Uint8ListExtension on Uint8List {
   }
 
   // Converts bytes to UTF-16 string
-  String toUtf16String([Endian endian = Endian.big]) {
+  String toUtf16String([Endian? endian = Endian.big]) {
     StringBuffer buffer = StringBuffer();
     int i = 0;
     if (this[0] == 0xFE && this[1] == 0xFF) {
@@ -74,7 +74,7 @@ extension _StringExtension on String {
   bool get isNullOrEmpty => this == null || this.isEmpty;
 
   // Converts UTF-16 string to bytes
-  Uint8List toUtf16Bytes([Endian endian = Endian.big, bool bom = false]) {
+  Uint8List toUtf16Bytes([Endian? endian = Endian.big, bool? bom = false]) {
     List<int> list =
         bom ? (endian == Endian.big ? [0xFE, 0xFF] : [0xFF, 0xFE]) : [];
     this.runes.forEach((rune) {
@@ -106,7 +106,7 @@ extension _StringExtension on String {
   }
 
   // Converts string to UTF-8 bytes
-  List<int> toUtf8Bytes([bool bom = false]) {
+  List<int> toUtf8Bytes([bool? bom = false]) {
     if (bom) {
       Uint8List data = utf8.encode(this);
       Uint8List dataWithBom = Uint8List(data.length + 3)
